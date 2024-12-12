@@ -1,8 +1,17 @@
+import { Route, Routes } from "react-router-dom";
+
 import Header from "./components/Header";
+import Courses from "./components/Courses";
+
 
 const App = () => {
   return (
-    <Header />
+    <div>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Courses />} />
+      </Routes>
+    </div>
   );
 };
 
