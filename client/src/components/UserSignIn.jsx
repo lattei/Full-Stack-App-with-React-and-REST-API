@@ -51,16 +51,16 @@ const UserSignIn = () => {
                 name="emailAddress" 
                 type="email" 
                 ref={emailAddress} />
-                    <label htmlFor="password">Password</label>
-                    <input 
-                    id="password" 
-                    name="password" 
-                    type="password" 
-                    ref={password} />
-                        <button className="button" 
-                        type="submit">Sign In</button>
-                        <button className="button button-secondary" 
-                        onclick={handleCancel}>Cancel</button>
+                <label htmlFor="password">Password</label>
+                <input 
+                id="password" 
+                name="password" 
+                type="password" 
+                ref={password} />
+                <button className="button" 
+                type="submit">Sign In</button>
+                <button className="button button-secondary" 
+                onclick={handleCancel}>Cancel</button>
             </form>
             <p>Don't have a user account? Click here to <Link to="/signup">sign up</Link>!
             </p>
