@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
+import Nav from "./Nav";
 
 const Header = () => {
     return (
       <header>
-        <div class="wrap header--flex">
-          <h1 class="header--logo">
-            {/* <a href="index.html">Courses</a> Replace this with a Link to Courses component */}
+        <div className="wrap header--flex">
+          <h1 className="header--logo">
             <Link to="/">Courses</Link>
           </h1>
+          < Nav />
         </div>
       </header>
     );

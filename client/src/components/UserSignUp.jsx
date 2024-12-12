@@ -27,7 +27,7 @@ const UserSignUp = () => {
             const response = await api("/users", "POST", user);
             if (response.status === 201) {
                 console.log(`Successfully signed up and authenticated.`);
-                await actions.signIn(user);
+                await actions.signIn(user.emailAddress, user.password);
                 navigate("/courses");
 
             } else if (response.status === 400) {
@@ -51,7 +51,7 @@ const UserSignUp = () => {
     return (
         <div className="form--centered">
             <h2>Sign Up</h2>
-
+            {/* Create error handling display when it doesn't work */}
             <form>
                 <label htmlFor="firstName">First Name</label>
                 <input 

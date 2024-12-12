@@ -43,7 +43,7 @@ const UserSignIn = () => {
     return (
         <div className="form--centered">
             <h2>Sign In</h2>
-
+            {/* Create error handling when this doesn't work! */}
             <form onSubmit={handleSubmit}>
                 <label htmlFor="emailAddress">Email Address</label>
                 <input
@@ -60,7 +60,7 @@ const UserSignIn = () => {
                 <button className="button" 
                 type="submit">Sign In</button>
                 <button className="button button-secondary" 
-                onclick={handleCancel}>Cancel</button>
+                onClick={handleCancel}>Cancel</button>
             </form>
             <p>Don't have a user account? Click here to <Link to="/signup">sign up</Link>!
             </p>
