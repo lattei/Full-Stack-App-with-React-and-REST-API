@@ -23,7 +23,7 @@ The Delete button doesn't need any functionality yet, you can implement this aft
     const getCourse = async () => {
       try {
         const res = await api(`/courses/${id}`, "GET");
-        if (res.status === 404) {
+        if (res.status === 400) {
           navigate("/notfound");
         }
         const data = await res.json();

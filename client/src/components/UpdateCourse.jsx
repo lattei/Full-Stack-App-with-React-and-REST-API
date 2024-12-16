@@ -46,6 +46,7 @@ const UpdateCourse = () => {
             }
         }
         getCourse();
+
     }, [authUser, id, navigate]);
 
     const handleSubmit = async (e) => {
@@ -98,29 +99,29 @@ const UpdateCourse = () => {
                     <div className="main--flex">
                         <div>
                             <label htmlFor="courseTitle">Course Title</label>
-                            <input 
-                            id="courseTitle" name="courseTitle" 
-                            type="text" 
-                            ref={courseTitle}
-                            defaultValue={course?.title}
+                            <input
+                                id="courseTitle" name="courseTitle"
+                                type="text"
+                                ref={courseTitle}
+                                defaultValue={course?.title}
                             />
 
-                                <p>By {authUser.firstName} {authUser.lastName}</p>
+                            <p>By {authUser?.firstName} {authUser?.lastName}</p>
 
-                                <label htmlFor="courseDescription">Course Description</label>
-                                <textarea id="courseDescription" name="courseDescription"
+                            <label htmlFor="courseDescription">Course Description</label>
+                            <textarea id="courseDescription" name="courseDescription"
                                 ref={courseDescription}
                                 defaultValue={course?.description}>
-                                </textarea>
+                            </textarea>
                         </div>
                         <div>
                             <label htmlFor="estimatedTime">Estimated Time</label>
-                            <input id="estimatedTime" name="estimatedTime" 
-                            ref={estimatedTime} 
-                            defaultValue={course?.estimatedTime} />
+                            <input id="estimatedTime" name="estimatedTime"
+                                ref={estimatedTime}
+                                defaultValue={course?.estimatedTime} />
 
-                                <label htmlFor="materialsNeeded">Materials Needed</label>
-                                <textarea id="materialsNeeded" name="materialsNeeded"
+                            <label htmlFor="materialsNeeded">Materials Needed</label>
+                            <textarea id="materialsNeeded" name="materialsNeeded"
                                 ref={materialsNeeded}
                                 defaultValue={course?.materialsNeeded}></textarea>
                         </div>
