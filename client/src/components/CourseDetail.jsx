@@ -19,20 +19,28 @@ The "Update Course" link should navigate the user to the /courses/:id/update rou
 The Delete button doesn't need any functionality yet, you can implement this after the authentication has been setup. */
 
   useEffect(() => {
+    const getCourse = async () => {
+      try {
+        const res = await api(`/courses/${id}`, "GET");
+        if (res.status === 200) {
+          const resData = await res.json();
+          setCourse(resData);
+        } else if (res.status === 400) {
+          navigate("/notfound");
+        } else {
+          throw new Error();
+        }
+
+      } catch (error) {
+        navigate("/error");
+      }
+
+    }
     getCourse();
 
   }, [id, navigate]);
 
-  const getCourse = async () => {
-    try {
-      const res = await api(`/courses/${id}`, "GET");
-      console.log(res.data)
-      setCourse(res.data);
-    } catch (error) {
-      navigate("/error");
-    }
-        
-  };
+
 
   return (
     <main>
