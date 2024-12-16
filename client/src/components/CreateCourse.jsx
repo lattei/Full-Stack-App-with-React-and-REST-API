@@ -6,6 +6,66 @@ import { api } from "../utils/apiHelper";
 
 const CreateCourse = () => {
 
+    const { authUser } = useContext(UserContext);
+    const navigate = useNavigate();
+
+    // Setting up state similar to how I've set up signup
+    
+    // const firstName = useRef(null);
+    // const lastName = useRef(null);
+    // const emailAddress = useRef(null);
+    // const password = useRef(null);
+    // const [errors, setErrors] = useState([]);
+
+        
+
+    //     const user = {
+    //         firstName: firstName.current.value,
+    //         lastName: lastName.current.value,
+    //         emailAddress: emailAddress.current.value,
+    //         password: password.current.value
+    //     };
+
+    /* course props:
+        title
+        description
+        estimated time
+        materialsneeded
+        */
+
+
+
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+            const response = await api("/users", "POST", user);
+            if (response.status === 201) {
+                console.log(`Successfully signed up and authenticated.`);
+                await actions.signIn(user.emailAddress, user.password);
+                navigate("/courses");
+
+            } else if (response.status === 400) {
+                const data = await response.json();
+                setErrors(data.errors);
+            } else {
+                throw new Error();
+            }
+        } catch (error) {
+            console.log(error);
+            navigate("/error");
+        }
+    }
+
+    const handleCancel = (e) => {
+        e.preventDefault();
+        navigate("/");
+    }
+
+
+
+
 
     return (
         <div className="wrap">
