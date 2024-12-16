@@ -29,7 +29,7 @@ const UserSignUp = () => {
             if (response.status === 201) {
                 console.log(`Successfully signed up and authenticated.`);
                 await actions.signIn(user.emailAddress, user.password);
-                navigate("/courses");
+                navigate("/");
 
             } else if (response.status === 400) {
                 const data = await response.json();
@@ -85,7 +85,7 @@ const UserSignUp = () => {
                 <button className="button" onClick={handleSubmit}>
                     Sign Up
                 </button>
-                <button className="button button-secondary" onclick={handleCancel}>
+                <button className="button button-secondary" onClick={handleCancel}>
                     Cancel
                 </button>
             </form>

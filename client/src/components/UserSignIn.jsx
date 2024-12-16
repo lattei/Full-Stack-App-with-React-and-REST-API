@@ -15,7 +15,10 @@ const UserSignIn = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         
-        let from = location.state ? location.state.from : "/";
+        let from = "/";
+        if (location.state) {
+            from = location.state.from;
+        }
 
         const credentials = {
             emailAddress: emailAddress.current.value,
@@ -24,6 +27,7 @@ const UserSignIn = () => {
 
         try {
             const user = await actions.signIn(credentials);
+            console.log(credentials);
             if (user) {
                 navigate(from);
             } else {

@@ -39,8 +39,7 @@ const CreateCourse = () => {
             /* After successfully creating the new course, redirect the user to the "Courses" or "Course Detail" screen for the newly created course. */
             if (response.status === 201) {
                 console.log(`Course has been created.`);
-                const courseId = response.data;
-                navigate(`/courses/${courseId}`);
+                navigate("/");
 
             } else if (response.status === 400) {
                 const data = await response.json();

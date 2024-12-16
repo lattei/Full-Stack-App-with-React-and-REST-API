@@ -64,7 +64,7 @@ The Delete button doesn't need any functionality yet, you can implement this aft
     <main>
       <div className="actions--bar">
         <div className="wrap">
-          {authUser && authUser.id === course.User.id ?
+          {authUser && authUser.id === course.userId ?
           <>
           <Link className="button"
             to={`/courses/${id}/update`}>

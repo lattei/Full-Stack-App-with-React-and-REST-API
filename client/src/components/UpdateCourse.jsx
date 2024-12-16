@@ -63,9 +63,10 @@ const UpdateCourse = () => {
 
         try {
             if (res.status === 204) {
+                console.log("Updated!")
                 navigate(`/courses/${id}`);
 
-            } else if (response.status === 400) {
+            } else if (res.status === 400) {
                 const data = await res.json();
                 setErrors(data.errors);
             } else if (res.status === 404) {
@@ -79,7 +80,7 @@ const UpdateCourse = () => {
             }
         } catch (error) {
             console.log(error);
-            naviaget("/error");
+            navigate("/error");
         }
     }
 
@@ -101,7 +102,7 @@ const UpdateCourse = () => {
                             id="courseTitle" name="courseTitle" 
                             type="text" 
                             ref={courseTitle}
-                            defaultValue={course.title}
+                            defaultValue={course?.title}
                             />
 
                                 <p>By {authUser.firstName} {authUser.lastName}</p>
@@ -109,22 +110,22 @@ const UpdateCourse = () => {
                                 <label htmlFor="courseDescription">Course Description</label>
                                 <textarea id="courseDescription" name="courseDescription"
                                 ref={courseDescription}
-                                defaultValue={course.description}>
+                                defaultValue={course?.description}>
                                 </textarea>
                         </div>
                         <div>
                             <label htmlFor="estimatedTime">Estimated Time</label>
                             <input id="estimatedTime" name="estimatedTime" 
                             ref={estimatedTime} 
-                            defaultValue={course.estimatedTime} />
+                            defaultValue={course?.estimatedTime} />
 
                                 <label htmlFor="materialsNeeded">Materials Needed</label>
                                 <textarea id="materialsNeeded" name="materialsNeeded"
                                 ref={materialsNeeded}
-                                defaultValue={course.materialsNeeded}></textarea>
+                                defaultValue={course?.materialsNeeded}></textarea>
                         </div>
                     </div>
-                    <button class="button" type="submit">Update Course</button><button class="button button-secondary" onClick={handleCancel}>Cancel</button>
+                    <button className="button" type="submit">Update Course</button><button className="button button-secondary" onClick={handleCancel}>Cancel</button>
                 </form>
             </div>
         </main>
