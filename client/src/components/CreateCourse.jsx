@@ -2,6 +2,7 @@ import { useContext, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import UserContext from "../context/UserContext";
 import { api } from "../utils/apiHelper";
+import ErrorsDisplay from "./ErrorsDisplay";
 
 
 const CreateCourse = () => {
@@ -11,8 +12,8 @@ const CreateCourse = () => {
 
     // Setting up state similar to how I've set up signup
     
-    const title = useRef(null);
-    const description = useRef(null);
+    const courseTitle = useRef(null);
+    const courseDescription = useRef(null);
     const estimatedTime = useRef(null);
     const materialsNeeded = useRef(null);
     const [errors, setErrors] = useState([]);
@@ -24,8 +25,8 @@ const CreateCourse = () => {
 
         const course = {
             userId: authUser.id,
-            title: title.current.value,
-            description: description.current.value,
+            title: courseTitle.current.value,
+            description: courseDescription.current.value,
             estimatedTime: estimatedTime.current.value,
             materialsNeeded: materialsNeeded.current.value
         };
@@ -65,14 +66,7 @@ const CreateCourse = () => {
     return (
         <div className="wrap">
             <h2>Create Course</h2>
-            <div className="validation--errors">
-                <h3>Validation Errors</h3>
-                {/* change this to error component */}
-                <ul>
-                    <li>Please provide a value for "Title"</li>
-                    <li>Please provide a value for "Description"</li>
-                </ul>
-            </div>
+            <ErrorsDisplay errors={errors} />
             <form onSubmit={handleSubmit}>
                 <div className="main--flex">
                     <div>
@@ -81,7 +75,7 @@ const CreateCourse = () => {
                         id="courseTitle" 
                         name="courseTitle" 
                         type="text" 
-                        ref={title}
+                        ref={courseTitle}
                         />
 
                             {/* <p>By {authUser.firstName} {authUser.lastName}</p> */}
@@ -90,7 +84,7 @@ const CreateCourse = () => {
                             <textarea 
                             id="courseDescription" 
                             name="courseDescription"
-                            ref={description}
+                            ref={courseDescription}
                             >
 
                             </textarea>

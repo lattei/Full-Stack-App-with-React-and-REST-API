@@ -2,6 +2,7 @@ import { useContext, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { api } from "../utils/apiHelper";
 import UserContext from "../context/UserContext";
+import ErrorsDisplay from "./ErrorsDisplay";
 
 const UserSignUp = () => {
 
@@ -51,7 +52,7 @@ const UserSignUp = () => {
     return (
         <div className="form--centered">
             <h2>Sign Up</h2>
-            {/* Create error handling display when it doesn't work */}
+            <ErrorsDisplay errors={errors} />
             <form>
                 <label htmlFor="firstName">First Name</label>
                 <input 

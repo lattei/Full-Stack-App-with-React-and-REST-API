@@ -1,6 +1,7 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useContext, useRef, useState } from "react";
 import UserContext from "../context/UserContext";
+import ErrorsDisplay from "./ErrorsDisplay";
 
 const UserSignIn = () => {
     const { actions } = useContext(UserContext);
@@ -43,7 +44,7 @@ const UserSignIn = () => {
     return (
         <div className="form--centered">
             <h2>Sign In</h2>
-            {/* Create error handling when this doesn't work! */}
+            <ErrorsDisplay errors={errors} />
             <form onSubmit={handleSubmit}>
                 <label htmlFor="emailAddress">Email Address</label>
                 <input

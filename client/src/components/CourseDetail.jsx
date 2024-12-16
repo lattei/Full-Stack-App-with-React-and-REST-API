@@ -2,6 +2,7 @@ import ReactMarkdown from "react-markdown";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import UserContext from "../context/UserContext";
+import { api } from "../utils/apiHelper";
 
 const CourseDetail = () => {
 
@@ -11,7 +12,7 @@ const CourseDetail = () => {
   const navigate = useNavigate();
 
   // Set state for course data
-  const [course, setCourse] = useState(null);
+  const [course, setCourse] = useState([]);
 
   /*Retrieve the data of the course from the /api/courses/:id API endpoint.
 Render the course data to the page. Use the React Markdown package to render the description and materialsNeeded properties as Markdown.
@@ -22,37 +23,62 @@ The Delete button doesn't need any functionality yet, you can implement this aft
     const getCourse = async () => {
       try {
         const res = await api(`/courses/${id}`, "GET");
-        if (res.status === 200) {
-          const resData = await res.json();
-          setCourse(resData);
-        } else if (res.status === 400) {
+        if (res.status === 404) {
           navigate("/notfound");
-        } else {
-          throw new Error();
         }
-
-      } catch (error) {
-        navigate("/error");
-      }
-
+        const data = await res.json();
+        setCourse(data);
+    } catch (error) {
+      console.log(error);
+      navigate("/error");
+    }
     }
     getCourse();
-
   }, [id, navigate]);
 
+  // Delete course fn delete when button is clicked, delete req to rest api /courses/:id endpoint redirect to homepage /courses
 
+  const handleDelete = async (e) => {
+    e.preventDefault();
+
+    try {
+      const res = await api(`/courses/${id}`, "DELETE", null, authUser);
+
+      if (res.status === 204) {
+        console.log(`Course successfully deleted!`);
+        navigate("/");
+      } else if (res.status === 404) {
+        navigate("/error");
+      } else if (res.status === 403) {
+        navigate("/forbidden")
+      } else {
+        throw new Error();
+      }
+    } catch (error) {
+      console.log(error);
+      navigate("/error")
+    }
+  }
 
   return (
     <main>
       <div className="actions--bar">
         <div className="wrap">
+          {authUser && authUser.id === course.User.id ?
+          <>
           <Link className="button"
             to={`/courses/${id}/update`}>
             Update Course
           </Link>
-          <button className="button" href="#">
+          <button className="button" 
+          href="#"
+          onClick={handleDelete}>
             Delete Course
           </button>
+            </>
+            :
+            <></>
+          }
           <Link className="button button-secondary" to="/">
             Return to List
           </Link>
@@ -68,7 +94,6 @@ The Delete button doesn't need any functionality yet, you can implement this aft
             <div>
               <h3 className="course--detail--title">Course</h3>
               <h4 className="course--name">{course.title}</h4>
-              {/* if course has user, user.firstname, user.lastname, no then ??? */}
               <p>
                 By{" "}
                 {course.User
