@@ -42,6 +42,7 @@ const UpdateCourse = () => {
                     throw new Error();
                 }
             } catch (error) {
+                console.log(`There's been a problem ${error}`);
                 navigate("/error");
             }
         }

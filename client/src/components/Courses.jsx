@@ -1,18 +1,30 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { api } from "../utils/apiHelper";
 
 
 const Courses = () => {
+    const navigate = useNavigate();
 
   //State for courses
     const  [courses, setCourses] = useState([]);
 
     useEffect(() => {
-      api("/courses", "GET")
-          .then(res => res.json())
-          .then(data => setCourses(data))
-    }, []);
+      const getCourses = async () => {
+        try {
+          const res = await api("/courses", "GET");
+          if (res.status === 500) {
+            navigate("/error")
+          }
+          const data = await res.json();
+          setCourses(data);
+        } catch (error) {
+          console.log(`Something went wrong, ${error}`);
+          navigate("/error");
+        }
+      }
+      getCourses();
+    }, [navigate]);
 
 
     return (
